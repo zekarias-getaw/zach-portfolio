@@ -7,6 +7,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import MatrixRain from './components/MatrixRain'
 import CustomCursor from './components/CustomCursor'
+import ParticleEffects from './components/ParticleEffects'
 import LoadingScreen from './components/LoadingScreen'
 
 function App() {
@@ -24,15 +25,9 @@ function App() {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'dark cyber-bg' : 'bg-white'}`}>
-      {/* Hide MatrixRain on mobile for performance */}
-      <div className="hidden md:block">
-        <MatrixRain />
-      </div>
-      
-      {/* Hide CustomCursor on mobile */}
-      <div className="hidden lg:block">
-        <CustomCursor />
-      </div>
+      <MatrixRain />
+      <ParticleEffects />
+      <CustomCursor />
       
       <div className="scanlines fixed inset-0 pointer-events-none z-20"></div>
       

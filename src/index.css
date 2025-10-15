@@ -22,7 +22,7 @@
 /* RESPONSIVE BASE */
 html {
   scroll-behavior: smooth;
-  font-size: 14px; /* Base font size for mobile */
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -48,27 +48,27 @@ body {
 .container-responsive {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem; /* Mobile padding */
+  padding: 0 1rem;
 }
 
 @media (min-width: 768px) {
   .container-responsive {
-    padding: 0 2rem; /* Tablet padding */
+    padding: 0 2rem;
   }
 }
 
 /* MOBILE FIRST SECTIONS */
 .section-responsive {
-  padding: 3rem 0; /* Mobile padding */
+  padding: 3rem 0;
 }
 
 @media (min-width: 768px) {
   .section-responsive {
-    padding: 5rem 0; /* Desktop padding */
+    padding: 5rem 0;
   }
 }
 
-/* Custom Cursor - Hide on mobile */
+/* Custom Cursor */
 @media (min-width: 1024px) {
   .custom-cursor {
     position: fixed;
@@ -99,7 +99,7 @@ body {
   background-image: 
     linear-gradient(rgba(0, 191, 255, 0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 191, 255, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px; /* Smaller grid for mobile */
+  background-size: 30px 30px;
 }
 
 @media (min-width: 768px) {
@@ -108,7 +108,73 @@ body {
   }
 }
 
-/* Glitch Effects - Only on desktop */
+/* Hologram Effects */
+.hologram-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.hologram-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(0, 191, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: hologramSpin 8s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hologramSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Particle Effects */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  background: var(--cyber-blue);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleFloat ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* 3D Transform Effects */
+.perspective-3d {
+  perspective: 1000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
+  transition: transform 0.3s ease;
+}
+
+/* Glitch Effects */
 @media (min-width: 768px) {
   .glitch-text {
     position: relative;
@@ -147,7 +213,7 @@ body {
   }
 }
 
-/* Neon Glow - Responsive */
+/* Neon Glow */
 .neon-glow {
   text-shadow: 0 0 5px currentColor;
 }
@@ -160,7 +226,7 @@ body {
   }
 }
 
-/* Glass Morphism - Responsive */
+/* Glass Morphism */
 .glass-effect {
   background: rgba(13, 13, 13, 0.8);
   backdrop-filter: blur(10px);
@@ -174,7 +240,7 @@ body {
   }
 }
 
-/* Cyber Button - Responsive */
+/* Cyber Button */
 .cyber-button {
   position: relative;
   background: transparent;
@@ -211,7 +277,22 @@ body {
   background-clip: text;
 }
 
-/* Scan Lines - Lighter on mobile */
+/* Cyber Accent */
+.cyber-accent {
+  background: linear-gradient(45deg, var(--cyber-blue), var(--neon-pink));
+}
+
+/* Cyber Pulse */
+.cyber-pulse {
+  animation: cyberPulse 2s ease-in-out infinite;
+}
+
+@keyframes cyberPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Scan Lines */
 .scanlines {
   position: relative;
   overflow: hidden;
@@ -227,7 +308,7 @@ body {
   background: linear-gradient(
     to bottom,
     transparent 50%,
-    rgba(0, 191, 255, 0.02) 50%
+    rgba(0, 191, 255, 0.03) 50%
   );
   background-size: 100% 3px;
   animation: scanlineMove 1s linear infinite;
@@ -240,7 +321,7 @@ body {
   100% { transform: translateY(100%); }
 }
 
-/* Digital Noise - Lighter on mobile */
+/* Digital Noise */
 .digital-noise::after {
   content: '';
   position: absolute;
@@ -255,13 +336,11 @@ body {
 
 /* Mobile optimizations */
 @media (max-width: 767px) {
-  /* Reduce animations on mobile for performance */
-  * {
-    animation-duration: 0.5s !important;
+  .hologram-container::before {
+    animation-duration: 12s;
   }
   
-  /* Simplify complex effects */
-  .hologram-container::before {
-    animation: none;
+  .hover-3d:hover {
+    transform: none;
   }
 }

@@ -8,12 +8,13 @@ const CustomCursor = () => {
     const updateCursor = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });
       
-      // Check if hovering over clickable elements
       const target = e.target;
       setIsPointer(
         window.getComputedStyle(target).cursor === 'pointer' ||
         target.tagName === 'A' ||
-        target.tagName === 'BUTTON'
+        target.tagName === 'BUTTON' ||
+        target.closest('button') ||
+        target.closest('a')
       );
     };
 
@@ -31,8 +32,6 @@ const CustomCursor = () => {
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transform: isPointer ? 'scale(1.5)' : 'scale(1)',
-          background: isPointer ? '#FF0080' : '#00BFFF'
         }}
       />
       <div 
@@ -40,7 +39,7 @@ const CustomCursor = () => {
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transform: isPointer ? 'scale(1.2)' : 'scale(1)'
+          transform: isPointer ? 'scale(1.5)' : 'scale(1)'
         }}
       />
     </>

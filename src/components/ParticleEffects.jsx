@@ -14,8 +14,7 @@ const ParticleEffects = () => {
       color: Math.random() > 0.5 ? '#00BFFF' : '#FF0080'
     });
 
-    // Initial particles
-    const initialParticles = Array.from({ length: 50 }, createParticle);
+    const initialParticles = Array.from({ length: 30 }, createParticle);
     setParticles(initialParticles);
 
     const interval = setInterval(() => {
@@ -26,8 +25,7 @@ const ParticleEffects = () => {
           x: p.x + Math.sin(p.y * 0.01) * 0.5
         })).filter(p => p.y < window.innerHeight + 100);
 
-        // Add new particles occasionally
-        if (Math.random() > 0.7 && updated.length < 100) {
+        if (Math.random() > 0.7 && updated.length < 50) {
           updated.push(createParticle());
         }
 
