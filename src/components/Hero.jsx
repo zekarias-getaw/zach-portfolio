@@ -108,7 +108,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
           {/* Cinematic Text Content */}
           <motion.div
             initial={{ x: -100, opacity: 0 }}
@@ -121,14 +121,14 @@ const Hero = () => {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="mb-8"
+              className="mb-6"
             >
-              <div className="flex items-center justify-center lg:justify-start gap-3 mb-6">
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 >
-                  <Zap className="text-cyber-blue neon-glow" size={24} />
+                  <Zap className="text-cyber-blue neon-glow" size={20} />
                 </motion.div>
                 <p className="font-orbitron text-cyber-blue text-sm tracking-widest neon-glow">
                   {displayText}
@@ -136,13 +136,13 @@ const Hero = () => {
                 </p>
               </div>
 
-              {/* Main Name with Glitch Effect */}
+              {/* Main Name with Glitch Effect - FIXED SIZES */}
               <div ref={nameRef} className="transform-3d transition-transform duration-300">
                 <motion.h1
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 1.2, type: "spring", stiffness: 100 }}
-                  className="font-orbitron text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 glitch-text"
+                  className="font-orbitron text-3xl md:text-5xl lg:text-6xl leading-tight mb-4 glitch-text"
                   data-text="ZEKARIAS GETAW"
                 >
                   <span className="text-cyber-white block">ZEKARIAS</span>
@@ -156,7 +156,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2 }}
-              className="mb-8"
+              className="mb-6"
             >
               <AnimatePresence mode="wait">
                 <motion.p
@@ -165,7 +165,7 @@ const Hero = () => {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="font-rajdhani text-2xl text-cyber-white/80 italic"
+                  className="font-rajdhani text-lg text-cyber-white/80 italic"
                 >
                   "Crafting {words[currentWordIndex]}"
                 </motion.p>
@@ -177,7 +177,7 @@ const Hero = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.5 }}
-              className="grid grid-cols-3 gap-6 mb-8"
+              className="grid grid-cols-3 gap-4 mb-6"
             >
               {[
                 { number: '6+', label: 'YEARS' },
@@ -189,10 +189,10 @@ const Hero = () => {
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="text-center"
                 >
-                  <div className="font-orbitron text-cyber-blue text-2xl mb-1 neon-glow">
+                  <div className="font-orbitron text-cyber-blue text-xl mb-1 neon-glow">
                     {stat.number}
                   </div>
-                  <div className="font-rajdhani text-cyber-white/60 text-sm">
+                  <div className="font-rajdhani text-cyber-white/60 text-xs">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -204,13 +204,13 @@ const Hero = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.8 }}
-              className="flex flex-col sm:flex-row gap-6 mb-12"
+              className="flex flex-col sm:flex-row gap-4 mb-8"
             >
               <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="cyber-button rounded-lg px-12 py-4 text-lg font-semibold text-center"
+                className="cyber-button rounded-lg px-8 py-3 text-base font-semibold text-center"
               >
                 START PROJECT
               </motion.a>
@@ -219,7 +219,7 @@ const Hero = () => {
                 href="#projects"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 border-cyber-blue text-cyber-blue font-orbitron font-bold py-4 px-8 rounded-lg hover:bg-cyber-blue hover:text-cyber-black transition-all duration-300 text-center"
+                className="border-2 border-cyber-blue text-cyber-blue font-orbitron font-bold py-3 px-6 rounded-lg hover:bg-cyber-blue hover:text-cyber-black transition-all duration-300 text-center"
               >
                 VIEW WORK
               </motion.a>
@@ -230,15 +230,15 @@ const Hero = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 2.2 }}
-              className="flex flex-col sm:flex-row items-center gap-8 text-cyber-white/60"
+              className="flex flex-col sm:flex-row items-center gap-6 text-cyber-white/60"
             >
-              <div className="flex items-center gap-4">
-                <Mail size={18} className="text-cyber-blue neon-glow" />
-                <span className="font-rajdhani text-cyber-white">zekariasgetaw26@gmail.com</span>
+              <div className="flex items-center gap-3">
+                <Mail size={16} className="text-cyber-blue neon-glow" />
+                <span className="font-rajdhani text-cyber-white text-sm">zekariasgetaw26@gmail.com</span>
               </div>
-              <div className="flex items-center gap-4">
-                <Phone size={18} className="text-cyber-blue neon-glow" />
-                <span className="font-rajdhani text-cyber-white">+251 994 681 535</span>
+              <div className="flex items-center gap-3">
+                <Phone size={16} className="text-cyber-blue neon-glow" />
+                <span className="font-rajdhani text-cyber-white text-sm">+251 994 681 535</span>
               </div>
             </motion.div>
           </motion.div>
@@ -261,7 +261,7 @@ const Hero = () => {
                 <div className="absolute -inset-4 bg-cyber-blue rounded-3xl opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500"></div>
                 
                 {/* Main Photo Container */}
-                <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-3xl overflow-hidden border-2 border-cyber-blue glass-effect shadow-2xl shadow-cyber-blue/30 hologram-container">
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden border-2 border-cyber-blue glass-effect shadow-2xl shadow-cyber-blue/30 hologram-container">
                   {/* Your Photo */}
                   <img 
                     src="/profile.jpg"
@@ -283,9 +283,9 @@ const Hero = () => {
                     rotate: [0, 180, 360]
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute -top-6 -right-6 w-14 h-14 glass-effect border border-cyber-blue rounded-full flex items-center justify-center shadow-2xl shadow-cyber-blue/50"
+                  className="absolute -top-4 -right-4 w-12 h-12 glass-effect border border-cyber-blue rounded-full flex items-center justify-center shadow-2xl shadow-cyber-blue/50"
                 >
-                  <Cpu className="text-cyber-blue" size={20} />
+                  <Cpu className="text-cyber-blue" size={18} />
                 </motion.div>
                 
                 <motion.div
@@ -294,9 +294,9 @@ const Hero = () => {
                     rotate: [360, 180, 0]
                   }}
                   transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-                  className="absolute -bottom-8 -left-8 w-16 h-16 glass-effect border border-neon-pink rounded-full flex items-center justify-center shadow-2xl shadow-neon-pink/50"
+                  className="absolute -bottom-6 -left-6 w-14 h-14 glass-effect border border-neon-pink rounded-full flex items-center justify-center shadow-2xl shadow-neon-pink/50"
                 >
-                  <Terminal className="text-neon-pink" size={24} />
+                  <Terminal className="text-neon-pink" size={20} />
                 </motion.div>
               </motion.div>
 
@@ -305,7 +305,7 @@ const Hero = () => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 2.5, type: "spring" }}
-                className="absolute bottom-6 right-6 glass-effect border border-cyber-blue rounded-full px-4 py-2 shadow-2xl shadow-cyber-blue/50"
+                className="absolute bottom-4 right-4 glass-effect border border-cyber-blue rounded-full px-3 py-1 shadow-2xl shadow-cyber-blue/50"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full neon-glow animate-pulse"></div>
@@ -317,14 +317,14 @@ const Hero = () => {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-12 border border-cyber-blue/30 rounded-full pointer-events-none"
+                className="absolute -inset-10 border border-cyber-blue/30 rounded-full pointer-events-none"
               >
                 {['REACT', 'NODE', 'TYPESCRIPT', 'MONGODB'].map((tech, index) => (
                   <div
                     key={tech}
                     className="absolute font-orbitron text-cyber-blue/60 text-xs"
                     style={{
-                      transform: `rotate(${index * 90}deg) translateX(160px) rotate(-${index * 90}deg)`
+                      transform: `rotate(${index * 90}deg) translateX(140px) rotate(-${index * 90}deg)`
                     }}
                   >
                     {tech}
@@ -347,7 +347,7 @@ const Hero = () => {
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <ArrowDown className="text-cyber-blue neon-glow" size={24} />
+            <ArrowDown className="text-cyber-blue neon-glow" size={20} />
           </motion.div>
           <p className="font-orbitron text-cyber-blue text-xs tracking-widest neon-glow">EXPLORE MORE</p>
         </div>
