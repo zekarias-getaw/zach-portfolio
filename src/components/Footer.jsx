@@ -8,7 +8,7 @@ const Footer = () => {
   const isInView = useInView(footerRef, { once: true, threshold: 0.1 })
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub Profile' },
+    { icon: Github, href: 'https://github.com/zekarias-getaw', label: 'GitHub Profile' },
     { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn Network' },
     { icon: Mail, href: 'mailto:zekariasgetaw26@gmail.com', label: 'Email Contact' },
   ]
