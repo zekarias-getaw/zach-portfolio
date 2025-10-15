@@ -142,7 +142,7 @@ const Hero = () => {
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 1.2, type: "spring", stiffness: 100 }}
-                  className="font-orbitron text-6xl md:text-8xl lg:text-9xl leading-tight mb-6 glitch-text"
+                  className="font-orbitron text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 glitch-text"
                   data-text="ZEKARIAS GETAW"
                 >
                   <span className="text-cyber-white block">ZEKARIAS</span>
