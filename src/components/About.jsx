@@ -16,42 +16,67 @@ const About = () => {
   const skills = [
     {
       icon: Terminal,
-      title: 'FRONTEND',
-      description: 'React, Vue, TypeScript, Next.js',
+      title: 'FRONTEND DEVELOPMENT',
+      description: 'React, Vue, TypeScript, Next.js, Modern UI Systems',
       level: 95,
       color: 'from-cyan-400 to-blue-500'
     },
     {
       icon: Smartphone,
-      title: 'MOBILE',
-      description: 'React Native, Flutter, Cross-Platform',
+      title: 'MOBILE DEVELOPMENT',
+      description: 'React Native, Flutter, PWA, Cross-Platform Applications',
       level: 90,
       color: 'from-green-400 to-emerald-500'
     },
     {
       icon: Database,
-      title: 'BACKEND',
-      description: 'Node.js, Python, APIs, Microservices',
+      title: 'BACKEND DEVELOPMENT',
+      description: 'Node.js, Python, APIs, Microservices, Database Design',
       level: 92,
       color: 'from-purple-400 to-pink-500'
     },
     {
       icon: Globe,
-      title: 'FULLSTACK',
-      description: 'End-to-end web applications',
+      title: 'FULLSTACK SOLUTIONS',
+      description: 'End-to-end web applications, REST APIs, Real-time Features',
       level: 88,
       color: 'from-orange-400 to-red-500'
+    },
+    {
+      icon: Code,
+      title: 'MODERN TECHNOLOGIES',
+      description: 'TypeScript, GraphQL, WebSockets, Progressive Web Apps',
+      level: 85,
+      color: 'from-yellow-400 to-amber-500'
+    },
+    {
+      icon: Cpu,
+      title: 'PERFORMANCE OPTIMIZATION',
+      description: 'Code optimization, Load times, SEO, Best Practices',
+      level: 80,
+      color: 'from-indigo-400 to-purple-500'
     }
   ]
 
+  useEffect(() => {
+    if (isInView) {
+      const elements = document.querySelectorAll('.skill-progress')
+      elements.forEach((el, index) => {
+        setTimeout(() => {
+          el.style.width = el.getAttribute('data-width') + '%'
+        }, index * 200)
+      })
+    }
+  }, [isInView])
+
   return (
     <section id="about" ref={sectionRef} className="py-20 relative overflow-hidden cyber-grid digital-noise">
-      <div className="compact-container relative z-10">
+      <div className="container-responsive relative z-10">
         {/* Header */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           className="text-center mb-12"
         >
           <motion.p
@@ -108,23 +133,24 @@ const About = () => {
           ))}
         </motion.div>
 
-        {/* Technical Proficiency */}
+        {/* Technical Proficiency - FIXED sizing and spacing */}
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-8"
         >
           <motion.h3
             initial={{ x: -50, opacity: 0 }}
             animate={isInView ? { x: 0, opacity: 1 } : {}}
             transition={{ delay: 0.6 }}
-            className="font-orbitron text-2xl text-cyber-white mb-8 text-center glitch-text"
+            className="font-orbitron text-xl sm:text-2xl text-cyber-white mb-6 text-center glitch-text"
             data-text="TECHNICAL PROFICIENCY"
           >
             TECHNICAL PROFICIENCY
           </motion.h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-0">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.title}
@@ -135,15 +161,15 @@ const About = () => {
                 className="glass-effect border border-cyber-blue/20 rounded-xl p-4 group hover:border-cyber-blue transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skill.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <skill.icon className="text-cyber-white" size={20} />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-r ${skill.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <skill.icon className="text-cyber-white" size={18} />
                   </div>
                   
-                  <div>
-                    <h3 className="font-orbitron text-cyber-white text-sm group-hover:text-cyber-blue transition-colors">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-orbitron text-cyber-white text-sm group-hover:text-cyber-blue transition-colors truncate">
                       {skill.title}
                     </h3>
-                    <p className="font-rajdhani text-cyber-white/70 text-xs">
+                    <p className="font-rajdhani text-cyber-white/70 text-xs truncate">
                       {skill.description}
                     </p>
                   </div>
@@ -156,8 +182,9 @@ const About = () => {
                   </div>
                   <div className="w-full h-1.5 bg-cyber-gray rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-gradient-to-r from-cyber-blue to-neon-pink rounded-full transition-all duration-1000 ease-out shadow-sm"
-                      style={{ width: isInView ? `${skill.level}%` : '0%' }}
+                      className="skill-progress h-full bg-gradient-to-r from-cyber-blue to-neon-pink rounded-full transition-all duration-1000 ease-out shadow-sm"
+                      data-width={skill.level}
+                      style={{ width: '0%' }}
                     />
                   </div>
                 </div>

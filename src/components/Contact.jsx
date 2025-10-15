@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Satellite, Cpu, Rocket } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Satellite, Cpu, Terminal, MessageSquare, Rocket } from 'lucide-react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,26 +12,26 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState(null)
   const [activeField, setActiveField] = useState(null)
   const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, threshold: 0.2 })
+  const isInView = useInView(sectionRef, { once: true, threshold: 0.3 })
 
   const contactInfo = [
     {
       icon: Mail,
-      title: 'EMAIL',
+      title: 'EMAIL COMMUNICATION',
       value: 'zekariasgetaw26@gmail.com',
       link: 'mailto:zekariasgetaw26@gmail.com',
       color: 'from-cyan-400 to-blue-500'
     },
     {
       icon: Phone,
-      title: 'PHONE',
+      title: 'PHONE CONNECTION',
       value: '+251 994 681 535',
       link: 'tel:+251994681535',
       color: 'from-green-400 to-emerald-500'
     },
     {
       icon: MapPin,
-      title: 'LOCATION',
+      title: 'LOCATION BASE',
       value: 'Addis Ababa, Ethiopia',
       link: '#',
       color: 'from-purple-400 to-pink-500'
@@ -50,12 +50,29 @@ const Contact = () => {
     setIsSubmitting(true)
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => setSubmitStatus(null), 4000)
+      console.log('📡 INITIATING PROJECT INQUIRY...', formData)
+      
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+      
+      if (data.success) {
+        console.log('🎯 PROJECT INQUIRY SUCCESSFUL:', data.cinematic)
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setSubmitStatus(null), 4000)
+      } else {
+        console.error('❌ SUBMISSION FAILED:', data.message)
+        setSubmitStatus('error')
+      }
     } catch (error) {
+      console.error('💥 NETWORK ERROR:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -64,12 +81,12 @@ const Contact = () => {
 
   return (
     <section id="contact" ref={sectionRef} className="py-20 relative overflow-hidden cyber-grid digital-noise">
-      <div className="compact-container relative z-10">
+      <div className="container-responsive relative z-10">
         {/* Header */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1 }}
           className="text-center mb-12"
         >
           <motion.p
@@ -134,7 +151,7 @@ const Contact = () => {
                   className="glass-effect border border-cyber-blue/30 rounded-xl p-4 flex items-center gap-4 group hover:border-cyber-blue transition-all duration-300 block"
                 >
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                    <item.icon className="text-cyber-white" size={18} />
+                    <item.icon className="text-cyber-white" size={20} />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-orbitron text-cyber-blue text-xs tracking-wider neon-glow">
@@ -165,6 +182,35 @@ const Contact = () => {
                 All communication channels active. Ready for web and mobile development projects.
               </p>
             </motion.div>
+
+            {/* System Activity Animation - FIXED */}
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={isInView ? { scale: 1 } : {}}
+              transition={{ delay: 1.6, type: "spring" }}
+              className="glass-effect border border-cyber-blue/30 rounded-xl p-4"
+            >
+              <h4 className="font-orbitron text-cyber-blue mb-3 tracking-widest text-sm neon-glow">
+                SYSTEM ACTIVITY
+              </h4>
+              <div className="flex items-end justify-between gap-1 h-16">
+                {[...Array(12)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="audio-bar w-2 bg-gradient-to-t from-cyber-blue to-neon-pink rounded-full transition-all duration-200 ease-out"
+                    animate={{
+                      height: [`${Math.random() * 30 + 10}%`, `${Math.random() * 70 + 20}%`, `${Math.random() * 40 + 10}%`],
+                    }}
+                    transition={{
+                      duration: Math.random() * 1.5 + 0.5,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      delay: i * 0.1,
+                    }}
+                  />
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
@@ -193,7 +239,7 @@ const Contact = () => {
                     onFocus={() => setActiveField('name')}
                     onBlur={() => setActiveField(null)}
                     required
-                    className="w-full px-3 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 transition-all duration-300"
+                    className="w-full px-4 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 transition-all duration-300"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -217,7 +263,7 @@ const Contact = () => {
                     onFocus={() => setActiveField('email')}
                     onBlur={() => setActiveField(null)}
                     required
-                    className="w-full px-3 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 transition-all duration-300"
+                    className="w-full px-4 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 transition-all duration-300"
                     placeholder="Enter your email address"
                   />
                 </div>
@@ -241,7 +287,7 @@ const Contact = () => {
                     onBlur={() => setActiveField(null)}
                     required
                     rows="4"
-                    className="w-full px-3 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 resize-none transition-all duration-300"
+                    className="w-full px-4 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 resize-none transition-all duration-300"
                     placeholder="Describe your project requirements..."
                   />
                 </div>
