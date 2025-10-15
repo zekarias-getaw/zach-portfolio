@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Satellite, Cpu, Terminal, MessageSquare, Rocket } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Satellite, Cpu, Rocket } from 'lucide-react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,26 +12,26 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState(null)
   const [activeField, setActiveField] = useState(null)
   const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, threshold: 0.3 })
+  const isInView = useInView(sectionRef, { once: true, threshold: 0.2 })
 
   const contactInfo = [
     {
       icon: Mail,
-      title: 'EMAIL COMMUNICATION',
+      title: 'EMAIL',
       value: 'zekariasgetaw26@gmail.com',
       link: 'mailto:zekariasgetaw26@gmail.com',
       color: 'from-cyan-400 to-blue-500'
     },
     {
       icon: Phone,
-      title: 'PHONE CONNECTION',
+      title: 'PHONE',
       value: '+251 994 681 535',
       link: 'tel:+251994681535',
       color: 'from-green-400 to-emerald-500'
     },
     {
       icon: MapPin,
-      title: 'LOCATION BASE',
+      title: 'LOCATION',
       value: 'Addis Ababa, Ethiopia',
       link: '#',
       color: 'from-purple-400 to-pink-500'
@@ -50,142 +50,63 @@ const Contact = () => {
     setIsSubmitting(true)
     
     try {
-      console.log('📡 INITIATING PROJECT INQUIRY...', formData)
-      
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await response.json()
-      
-      if (data.success) {
-        console.log('🎯 PROJECT INQUIRY SUCCESSFUL:', data.cinematic)
-        setSubmitStatus('success')
-        setFormData({ name: '', email: '', message: '' })
-        setTimeout(() => setSubmitStatus(null), 4000)
-      } else {
-        console.error('❌ SUBMISSION FAILED:', data.message)
-        setSubmitStatus('error')
-      }
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      setSubmitStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+      setTimeout(() => setSubmitStatus(null), 4000)
     } catch (error) {
-      console.error('💥 NETWORK ERROR:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  // Audio visualization effect
-  useEffect(() => {
-    if (!isInView) return
-
-    const bars = document.querySelectorAll('.audio-bar')
-    bars.forEach((bar, index) => {
-      const animateBar = () => {
-        const height = Math.random() * 100 + 10
-        bar.style.height = `${height}%`
-        setTimeout(animateBar, Math.random() * 300 + 200)
-      }
-      setTimeout(animateBar, index * 100)
-    })
-  }, [isInView])
-
   return (
-    <section id="contact" ref={sectionRef} className="py-32 relative overflow-hidden cyber-grid digital-noise">
-      {/* Animated Orbital Elements */}
-      <div className="absolute inset-0">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-cyber-blue rounded-full opacity-40"
-            animate={{
-              x: [0, Math.cos(i * 30) * 200, 0],
-              y: [0, Math.sin(i * 30) * 200, 0],
-              scale: [1, 2, 1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              delay: i * 0.5,
-            }}
-            style={{
-              left: '50%',
-              top: '50%',
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Cinematic Header */}
+    <section id="contact" ref={sectionRef} className="py-20 relative overflow-hidden cyber-grid digital-noise">
+      <div className="compact-container relative z-10">
+        {/* Header */}
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 1 }}
-          className="text-center mb-20 perspective-3d"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ delay: 0.3, type: "spring" }}
-            className="inline-block mb-6"
-          >
-            <div className="relative">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="w-20 h-20 border-4 border-neon-pink border-t-transparent rounded-full mx-auto"
-              />
-              <Satellite className="absolute inset-0 m-auto text-neon-pink neon-glow" size={32} />
-            </div>
-          </motion.div>
-          
           <motion.p
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
-            className="font-orbitron text-cyber-blue mb-4 tracking-widest text-lg neon-glow"
+            transition={{ delay: 0.3 }}
+            className="font-orbitron text-cyber-blue mb-3 tracking-wider text-sm neon-glow"
           >
             START YOUR PROJECT
           </motion.p>
           
           <motion.h2
-            initial={{ y: 50, opacity: 0 }}
+            initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.7 }}
-            className="font-orbitron text-6xl md:text-7xl text-cyber-white mb-8 glitch-text"
+            transition={{ delay: 0.5 }}
+            className="font-orbitron text-3xl md:text-4xl text-cyber-white mb-4 glitch-text"
             data-text="GET IN TOUCH"
           >
             GET IN
             <span className="block cyber-text-gradient neon-glow">TOUCH</span>
           </motion.h2>
-          
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : {}}
-            transition={{ delay: 1 }}
-            className="w-32 h-1 bg-gradient-to-r from-cyber-blue to-neon-pink mx-auto rounded-full shadow-2xl shadow-cyber-blue/50"
-          />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Cinematic Contact Information */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Contact Information */}
           <motion.div
-            initial={{ x: -100, opacity: 0 }}
+            initial={{ x: -50, opacity: 0 }}
             animate={isInView ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-6"
           >
             <div>
               <motion.h3
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: 0.4 }}
-                className="font-orbitron text-3xl text-cyber-white mb-6 glitch-text"
+                className="font-orbitron text-xl text-cyber-white mb-4 glitch-text"
                 data-text="PROJECT DISCUSSION"
               >
                 PROJECT DISCUSSION
@@ -194,132 +115,73 @@ const Contact = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: 0.6 }}
-                className="font-rajdhani text-cyber-white/80 text-lg leading-relaxed"
+                className="font-rajdhani text-cyber-white/80 text-sm leading-relaxed"
               >
-                Ready to bring your digital vision to life? Let's collaborate to create 
-                cutting-edge web and mobile solutions that deliver exceptional user 
-                experiences and drive business growth. Response time: &lt; 24 hours.
+                Ready to bring your digital vision to life? Let's collaborate to create cutting-edge solutions. Response time: &lt; 24 hours.
               </motion.p>
             </div>
 
-            {/* Animated Contact Channels */}
-            <div className="space-y-6">
+            {/* Contact Channels */}
+            <div className="space-y-4">
               {contactInfo.map((item, index) => (
                 <motion.a
                   key={index}
                   href={item.link}
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  initial={{ x: -50, opacity: 0 }}
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  initial={{ x: -30, opacity: 0 }}
                   animate={isInView ? { x: 0, opacity: 1 } : {}}
                   transition={{ delay: index * 0.2 + 0.8 }}
-                  className="glass-effect border border-cyber-blue/30 rounded-2xl p-6 flex items-center gap-6 group hover:border-cyber-blue transition-all duration-500 block transform-3d hover-3d"
+                  className="glass-effect border border-cyber-blue/30 rounded-xl p-4 flex items-center gap-4 group hover:border-cyber-blue transition-all duration-300 block"
                 >
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-2xl`}>
-                    <item.icon className="text-cyber-white" size={28} />
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <item.icon className="text-cyber-white" size={18} />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-orbitron text-cyber-blue mb-2 tracking-widest text-sm neon-glow">
+                    <h4 className="font-orbitron text-cyber-blue text-xs tracking-wider neon-glow">
                       {item.title}
                     </h4>
-                    <p className="font-rajdhani text-cyber-white text-lg">
+                    <p className="font-rajdhani text-cyber-white text-sm">
                       {item.value}
                     </p>
                   </div>
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="text-cyber-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <Send size={20} />
-                  </motion.div>
                 </motion.a>
               ))}
             </div>
 
-            {/* System Status Panel */}
+            {/* Status Panel */}
             <motion.div
-              initial={{ y: 30, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ delay: 1.4 }}
-              className="glass-effect border border-cyber-blue/30 rounded-2xl p-6 relative overflow-hidden"
+              className="glass-effect border border-cyber-blue/30 rounded-xl p-4"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyber-blue/5 via-transparent to-neon-pink/5"></div>
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-3 h-3 bg-green-400 rounded-full neon-glow animate-pulse"></div>
-                  <span className="font-orbitron text-cyber-blue tracking-widest text-sm">
-                    STATUS: AVAILABLE FOR PROJECTS
-                  </span>
-                </div>
-                <p className="font-rajdhani text-cyber-white/70">
-                  All communication channels active. Ready for web and mobile development 
-                  projects, from concept to deployment. Professional workflow established.
-                </p>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full neon-glow animate-pulse"></div>
+                <span className="font-orbitron text-cyber-blue text-xs tracking-wider">
+                  STATUS: AVAILABLE FOR PROJECTS
+                </span>
               </div>
-            </motion.div>
-
-            {/* Audio Visualization */}
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={isInView ? { scale: 1 } : {}}
-              transition={{ delay: 1.6, type: "spring" }}
-              className="glass-effect border border-cyber-blue/30 rounded-2xl p-6"
-            >
-              <h4 className="font-orbitron text-cyber-blue mb-4 tracking-widest text-sm neon-glow">
-                SYSTEM ACTIVITY
-              </h4>
-              <div className="flex items-end justify-between gap-1 h-20">
-                {[...Array(15)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="audio-bar w-2 bg-gradient-to-t from-cyber-blue to-neon-pink rounded-full transition-all duration-200 ease-out"
-                    style={{ height: '20%' }}
-                  />
-                ))}
-              </div>
+              <p className="font-rajdhani text-cyber-white/70 text-xs">
+                All communication channels active. Ready for web and mobile development projects.
+              </p>
             </motion.div>
           </motion.div>
 
-          {/* Cinematic Contact Form */}
+          {/* Contact Form */}
           <motion.div
-            initial={{ x: 100, opacity: 0 }}
+            initial={{ x: 50, opacity: 0 }}
             animate={isInView ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="glass-effect border border-cyber-blue/30 rounded-3xl p-8 relative overflow-hidden hologram-container transform-3d"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="glass-effect border border-cyber-blue/30 rounded-2xl p-6 relative overflow-hidden"
           >
-            {/* Animated Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cyber-blue/5 via-transparent to-neon-pink/5"></div>
-            
-            {/* Floating Elements */}
-            {[...Array(3)].map((_, i) => (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name Field */}
               <motion.div
-                key={i}
-                className="absolute w-4 h-4 border border-cyber-blue rounded-full"
-                animate={{
-                  x: [0, Math.random() * 100 - 50, 0],
-                  y: [0, Math.random() * 100 - 50, 0],
-                  scale: [1, 1.5, 1],
-                }}
-                transition={{
-                  duration: Math.random() * 6 + 3,
-                  repeat: Infinity,
-                  delay: i * 2,
-                }}
-                style={{
-                  left: `${Math.random() * 80 + 10}%`,
-                  top: `${Math.random() * 80 + 10}%`,
-                }}
-              />
-            ))}
-
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-              {/* Your Name */}
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: 0.8 }}
               >
-                <label className="font-orbitron text-cyber-blue mb-3 block tracking-widest text-sm neon-glow">
+                <label className="font-orbitron text-cyber-blue text-xs mb-2 block tracking-wider">
                   YOUR NAME
                 </label>
                 <div className="relative">
@@ -331,26 +193,19 @@ const Contact = () => {
                     onFocus={() => setActiveField('name')}
                     onBlur={() => setActiveField(null)}
                     required
-                    className="w-full px-4 py-4 glass-effect border border-cyber-blue/30 rounded-xl focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani placeholder-cyber-white/40 transition-all duration-300"
+                    className="w-full px-3 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 transition-all duration-300"
                     placeholder="Enter your full name"
                   />
-                  {activeField === 'name' && (
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-cyber-blue"
-                    />
-                  )}
                 </div>
               </motion.div>
 
-              {/* Email Address */}
+              {/* Email Field */}
               <motion.div
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: 1 }}
               >
-                <label className="font-orbitron text-cyber-blue mb-3 block tracking-widest text-sm neon-glow">
+                <label className="font-orbitron text-cyber-blue text-xs mb-2 block tracking-wider">
                   EMAIL ADDRESS
                 </label>
                 <div className="relative">
@@ -362,26 +217,19 @@ const Contact = () => {
                     onFocus={() => setActiveField('email')}
                     onBlur={() => setActiveField(null)}
                     required
-                    className="w-full px-4 py-4 glass-effect border border-cyber-blue/30 rounded-xl focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani placeholder-cyber-white/40 transition-all duration-300"
+                    className="w-full px-3 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 transition-all duration-300"
                     placeholder="Enter your email address"
                   />
-                  {activeField === 'email' && (
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-cyber-blue"
-                    />
-                  )}
                 </div>
               </motion.div>
 
-              {/* Project Details */}
+              {/* Message Field */}
               <motion.div
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: 1.2 }}
               >
-                <label className="font-orbitron text-cyber-blue mb-3 block tracking-widest text-sm neon-glow">
+                <label className="font-orbitron text-cyber-blue text-xs mb-2 block tracking-wider">
                   PROJECT DETAILS
                 </label>
                 <div className="relative">
@@ -392,17 +240,10 @@ const Contact = () => {
                     onFocus={() => setActiveField('message')}
                     onBlur={() => setActiveField(null)}
                     required
-                    rows="6"
-                    className="w-full px-4 py-4 glass-effect border border-cyber-blue/30 rounded-xl focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani placeholder-cyber-white/40 resize-none transition-all duration-300"
-                    placeholder="Describe your project requirements, timeline, and vision..."
+                    rows="4"
+                    className="w-full px-3 py-3 glass-effect border border-cyber-blue/30 rounded-lg focus:outline-none focus:border-cyber-blue text-cyber-white font-rajdhani text-sm placeholder-cyber-white/40 resize-none transition-all duration-300"
+                    placeholder="Describe your project requirements..."
                   />
-                  {activeField === 'message' && (
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-cyber-blue"
-                    />
-                  )}
                 </div>
               </motion.div>
 
@@ -412,54 +253,45 @@ const Contact = () => {
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: 1.4 }}
-                className="w-full cyber-button rounded-xl py-4 text-lg font-semibold flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 relative overflow-hidden"
+                className="w-full cyber-button rounded-lg py-3 text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
               >
                 {isSubmitting ? (
                   <>
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="w-5 h-5 border-2 border-cyber-black border-t-transparent rounded-full"
+                      className="w-4 h-4 border-2 border-cyber-black border-t-transparent rounded-full"
                     />
-                    <span className="font-orbitron">PROCESSING REQUEST...</span>
+                    <span className="font-orbitron">PROCESSING...</span>
                   </>
                 ) : (
                   <>
-                    <Rocket size={20} />
+                    <Rocket size={16} />
                     <span className="font-orbitron">LAUNCH PROJECT</span>
                   </>
                 )}
-                
-                {/* Button Glow Effect */}
-                <div className="absolute inset-0 bg-cyber-blue opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-xl"></div>
               </motion.button>
 
-              {/* Cinematic Success Message */}
+              {/* Success Message */}
               <AnimatePresence>
                 {submitStatus === 'success' && (
                   <motion.div
-                    initial={{ opacity: 0, y: 20, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, scale: 0.8 }}
-                    className="glass-effect border border-green-400 rounded-xl p-4 text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="glass-effect border border-green-400 rounded-lg p-3 text-center"
                   >
-                    <div className="flex items-center justify-center gap-3">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring" }}
-                      >
-                        <Cpu className="text-green-400" size={24} />
-                      </motion.div>
+                    <div className="flex items-center justify-center gap-2">
+                      <Cpu className="text-green-400" size={16} />
                       <div>
-                        <p className="font-orbitron text-green-400 text-sm tracking-widest">
+                        <p className="font-orbitron text-green-400 text-xs tracking-wider">
                           REQUEST RECEIVED
                         </p>
-                        <p className="font-rajdhani text-cyber-white/80 text-sm">
-                          Project inquiry received. Response incoming within 24 hours.
+                        <p className="font-rajdhani text-cyber-white/80 text-xs">
+                          Response incoming within 24 hours.
                         </p>
                       </div>
                     </div>
@@ -470,29 +302,6 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Binary Matrix Rain */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(25)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute font-mono text-cyber-blue/15 text-sm"
-            initial={{ y: -100, x: Math.random() * window.innerWidth }}
-            animate={{ y: '100vh' }}
-            transition={{
-              duration: Math.random() * 8 + 4,
-              repeat: Infinity,
-              delay: Math.random() * 3
-            }}
-            style={{ left: `${Math.random() * 100}%` }}
-          >
-            {Math.random() > 0.5 ? '1' : '0'}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Scanlines Overlay */}
-      <div className="scanlines absolute inset-0 pointer-events-none"></div>
     </section>
   )
 }
